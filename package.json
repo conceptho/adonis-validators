@@ -22,7 +22,7 @@
   "scripts": {
     "eslint": "eslint ./ --fix",
     "pre-publish": "npm run eslint && npm publish",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node japaFile.js"
   },
   "bugs": {
     "url": "https://github.com/conceptho/adonis-validators/issues"
