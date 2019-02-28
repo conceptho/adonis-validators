@@ -1,0 +1,38 @@
+{
+  "name": "@conceptho/adonis-validators",
+  "version": "0.0.1",
+  "deprecated": false,
+  "description": "",
+  "main": "index.js",
+  "author": "Conceptho",
+  "license": "MIT",
+  "homepage": "https://github.com/conceptho/adonis-validators#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/conceptho/adonis-validators.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "conceptho",
+    "adonisjs",
+    "validators"
+  ],
+  "scripts": {
+    "eslint": "eslint ./ --fix",
+    "pre-publish": "npm run eslint && npm publish",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/conceptho/adonis-validators/issues"
+  },
+  "devDependencies": {
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "japa": "^2.0.7"
+  }
+}

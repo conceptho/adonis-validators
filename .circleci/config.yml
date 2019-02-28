@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  npm:
+    steps:
+      - run: npm install
+
+  build:
+    steps:
+      - checkout
+
+  test:
+    steps:
+      - checkout
+      - run: node japaFile.js
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - npm
+      - test
