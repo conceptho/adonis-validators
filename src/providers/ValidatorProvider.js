@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable global-require */
 const { ServiceProvider } = require('@adonisjs/fold');
@@ -12,12 +13,13 @@ class ValidatorProvider extends ServiceProvider {
 
   boot() {
     const Validator = use('Validator');
+    const validatorFunctions = require('../validators');
 
-    const cpf = require('../validators/cpf');
-    const exists = require('../validators/exists');
+    for (const funcName of Object.keys(validatorFunctions)) {
+      const fn = validatorFunctions[funcName];
 
-    Validator.extend('cpf', cpf.bind(cpf));
-    Validator.extend('exists', exists.bind(exists));
+      Validator.extends(funcName, fn.bind(fn));
+    }
   }
 }
 
