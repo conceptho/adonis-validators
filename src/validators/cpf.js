@@ -4,9 +4,10 @@ const repeated = ['11111111111', '22222222222', '33333333333', '44444444444', '5
 const cpf = async (data, field, message = defaultMessage, args = [], get = (data, field) => data[field]) => {
   const value = get(data, field);
 
-  // Not a number
+  // not a number and not empty
   if (!/\d+/.test(value)) throw message;
 
+  // not repeated
   if (repeated.includes(value)) throw message;
 
   let soma = 0;

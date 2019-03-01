@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable global-require */
 const { ServiceProvider } = require('@adonisjs/fold');
 
 class ValidatorProvider extends ServiceProvider {
@@ -10,9 +12,12 @@ class ValidatorProvider extends ServiceProvider {
 
   boot() {
     const Validator = use('Validator');
+
     const cpf = require('../validators/cpf');
+    const exists = require('../validators/exists');
 
     Validator.extend('cpf', cpf.bind(cpf));
+    Validator.extend('exists', exists.bind(exists));
   }
 }
 
