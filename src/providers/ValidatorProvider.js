@@ -18,7 +18,7 @@ class ValidatorProvider extends ServiceProvider {
     for (const funcName of Object.keys(validatorFunctions)) {
       const fn = validatorFunctions[funcName];
 
-      Validator.extends(funcName, fn.bind(fn));
+      Validator.extend(funcName, fn.bind(fn));
     }
   }
 }
