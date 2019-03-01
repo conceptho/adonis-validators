@@ -5,7 +5,7 @@ const repeated = [
   '66666666666', '77777777777', '88888888888', '99999999999',
 ];
 
-const cpf = async (data, field, message, args, get) => {
+const cpf = async (data, field, message, args, get = () => data[field]) => {
   const value = get(data, field);
 
   // not a number and not empty
