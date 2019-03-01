@@ -1,13 +1,11 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 const test = require('japa');
-
 const validateCpf = require('../src/validators/cpf');
 
 const throws = async (callback) => {
   try {
     await callback();
-
     return false;
   } catch (error) {
     return true;
@@ -30,11 +28,5 @@ test('cpf should be validated', async (assert) => {
     const hasError = await throws(async () => validateCpf({ cpf }, 'cpf'));
 
     assert.equal(hasError, shouldThrow);
-    /* if (shouldThrow) {
-      assert.equal(hasError, false);
-      // assert.doesNotThrow(async () => validateCpf({ cpf }, 'cpf'));
-    } else {
-      assert.equal(hasError, true);
-    } */
   }
 });
