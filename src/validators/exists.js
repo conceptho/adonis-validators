@@ -1,6 +1,4 @@
-const Database = use('Database');
-
-const exists = async (data, field, message, args, get) => {
+const exists = Database => async (data, field, message, args, get) => {
   const value = get(data, field);
 
   if (!value) return;
