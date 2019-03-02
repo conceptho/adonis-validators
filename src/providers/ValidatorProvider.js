@@ -19,7 +19,7 @@ class ValidatorProvider extends ServiceProvider {
     const isBetween = require('../validators/isBetween');
 
     const uniqueWhere = require('../validators/uniqueWhere')(Database);
-    const exists = require('../validators')(Database);
+    const exists = require('../validators/exists')(Database);
 
     Validator.extend('cpf', cpf.bind(cpf));
     Validator.extend('isBetween', isBetween.bind(isBetween));
