@@ -10,7 +10,7 @@ test('cpf', async (assert) => {
     { data: '14715498790', shouldThrow: false },
     { data: '11111111111', shouldThrow: true },
     { data: '123', shouldThrow: true },
-    { data: '', shouldThrow: true },
+    { data: '', shouldThrow: false },
     { data: '14869122731', shouldThrow: false },
     { data: '12965888748', shouldThrow: false },
     { data: 'asghror', shouldThrow: true },
