@@ -3,16 +3,9 @@
 const test = require('japa');
 const validateCpf = require('../src/validators/cpf');
 
-const throws = async (callback) => {
-  try {
-    await callback();
-    return false;
-  } catch (error) {
-    return true;
-  }
-};
+const { throws } = require('./helpers');
 
-test('cpf should be validated', async (assert) => {
+test('cpf', async (assert) => {
   const testCases = [
     { data: '14715498790', shouldThrow: false },
     { data: '11111111111', shouldThrow: true },
@@ -23,9 +16,8 @@ test('cpf should be validated', async (assert) => {
     { data: 'asghror', shouldThrow: true },
   ];
 
-  for (const testCase of testCases) {
-    const { data: cpf, shouldThrow } = testCase;
-    const hasError = await throws(async () => validateCpf({ cpf }, 'cpf'));
+  for (const { data, shouldThrow } of testCases) {
+    const hasError = await throws(async () => validateCpf({ data }, 'data'));
 
     assert.equal(hasError, shouldThrow);
   }

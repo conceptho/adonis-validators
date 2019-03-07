@@ -13,13 +13,18 @@ class ValidatorProvider extends ServiceProvider {
 
   boot() {
     const Validator = use('Validator');
-    const validatorFunctions = require('../validators');
+    const Database = use('Database');
 
-    for (const funcName of Object.keys(validatorFunctions)) {
-      const fn = validatorFunctions[funcName];
+    const cpf = require('../validators/cpf');
+    const isBetween = require('../validators/isBetween');
 
-      Validator.extends(funcName, fn.bind(fn));
-    }
+    const uniqueWhere = require('../validators/uniqueWhere')(Database);
+    const exists = require('../validators/exists')(Database);
+
+    Validator.extend('cpf', cpf.bind(cpf));
+    Validator.extend('isBetween', isBetween.bind(isBetween));
+    Validator.extend('uniqueWhere', uniqueWhere.bind(uniqueWhere));
+    Validator.extend('exists', exists.bind(exists));
   }
 }
 

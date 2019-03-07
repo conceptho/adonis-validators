@@ -1,4 +1,4 @@
-const isBetween = async (data, field, message, args, get) => {
+const isBetween = async (data, field, message, args, get = () => data[field]) => {
   const value = get(data, field);
   if (!value) {
     return;
