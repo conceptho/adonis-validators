@@ -9,6 +9,7 @@
       "class-methods-use-this": ["off"],
       "max-len": [2, 120, 4],
       "no-restricted-globals": "off",
+      "no-throw-literal":"off",
       "object-curly-newline": [
         "error",
         {

@@ -7,7 +7,7 @@ const exists = Database => async (data, field, message, args, get) => {
   const row = await Database.table(table).where(column, value).first();
 
   if (!row) {
-    throw message;
+    throw `value ${value} already exists on table ${table} column ${column}`;
   }
 };
 
