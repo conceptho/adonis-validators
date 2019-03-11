@@ -6,37 +6,50 @@ const repeated = [
 const cpf = async (data, field, message, args, get = () => data[field]) => {
   const value = get(data, field);
 
-  if (!value)
-    return
+  if (!value) {
+    // required rule should take care
+    return;
+  }
 
-  // not a number and not enough digits
-  if (!/\d{11}/.test(value)) throw `invalid cpf field lenght (${value.lenght}). expected 11 digits.`;
+  if (!/^[\d-.]+$/.test(value)) {
+    // accepts only digits, - and .
+    throw `invalid cpf (${value}).`;
+  }
 
-  // not repeated
-  if (repeated.includes(value)) throw `invalid cpf (${value}).`;
+  const sanitizedValue = value.replace(/[^\d]/g, '');
+
+  if (!/\d{11}/.test(sanitizedValue)) {
+    // not a number and not enough digits
+    throw `invalid cpf field lenght (${sanitizedValue.lenght}). expected 11 digits.`;
+  }
+
+  if (repeated.includes(sanitizedValue)) {
+    // not repeated
+    throw `invalid cpf (${value}).`;
+  }
 
   let soma = 0;
   let resto;
 
   for (let i = 1; i <= 9; i += 1) {
-    soma += parseInt(value.substring(i - 1, i), 10) * (11 - i);
+    soma += parseInt(sanitizedValue.substring(i - 1, i), 10) * (11 - i);
   }
 
   resto = (soma * 10) % 11;
 
   if ((resto === 10) || (resto === 11)) resto = 0;
-  if (resto !== parseInt(value.substring(9, 10), 10)) throw `invalid cpf (${value}).`;
+  if (resto !== parseInt(sanitizedValue.substring(9, 10), 10)) throw `invalid cpf (${value}).`;
 
   soma = 0;
 
   for (let i = 1; i <= 10; i += 1) {
-    soma += parseInt(value.substring(i - 1, i), 10) * (12 - i);
+    soma += parseInt(sanitizedValue.substring(i - 1, i), 10) * (12 - i);
   }
 
   resto = (soma * 10) % 11;
 
   if ((resto === 10) || (resto === 11)) resto = 0;
-  if (resto !== parseInt(value.substring(10, 11), 10)) throw `invalid cpf (${value}).`;
+  if (resto !== parseInt(sanitizedValue.substring(10, 11), 10)) throw `invalid cpf (${value}).`;
 };
 
 module.exports = cpf;
