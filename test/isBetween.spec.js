@@ -6,25 +6,37 @@ const isBetween = require('../src/validators/isBetween');
 
 const { throws } = require('./helpers');
 
-test('isBetween', async (assert) => {
-  const testCases = [
-    {
-      data: 1, args: ['0', '1'], shouldThrow: false,
-    },
-    {
-      data: -1, args: ['-2', '3'], shouldThrow: false,
-    },
-    {
-      data: 5, args: ['-1', '4'], shouldThrow: true,
-    },
-    {
-      data: 4.15, args: ['-1', '4.5'], shouldThrow: false,
-    },
-  ];
+test.group('isBetween', () => {
+  test('a number inside the given range should not throw error',
+    async (assert) => {
+      let hasError;
 
-  for (const { data, shouldThrow, args } of testCases) {
-    const hasError = await throws(async () => isBetween({ data }, 'data', '', args));
+      hasError = await throws(async () => isBetween({ data: 1 }, 'data', '', ['0', '1']));
+      assert.equal(hasError, false);
 
-    assert.equal(hasError, shouldThrow);
-  }
+      hasError = await throws(async () => isBetween({ data: -1 }, 'data', '', ['-2', '3']));
+      assert.equal(hasError, false);
+    });
+
+  test('a number outside the given range should throw an error',
+    async (assert) => {
+      let hasError;
+
+      hasError = await throws(async () => isBetween({ data: 2 }, 'data', '', ['0', '1']));
+      assert.equal(hasError, true);
+
+      hasError = await throws(async () => isBetween({ data: -2.1 }, 'data', '', ['-2', '3']));
+      assert.equal(hasError, true);
+    });
+
+  test('args can be strings representing floats',
+    async (assert) => {
+      let hasError;
+
+      hasError = await throws(async () => isBetween({ data: 2 }, 'data', '', ['0', '4.5']));
+      assert.equal(hasError, false);
+
+      hasError = await throws(async () => isBetween({ data: -2.1 }, 'data', '', ['-2.1', '3']));
+      assert.equal(hasError, false);
+    });
 });
