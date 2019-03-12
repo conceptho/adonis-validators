@@ -43,3 +43,27 @@ How to Use:
     value: 'number|isBetween:0.0,5',
   }
   ```
+- only
+  ```javascript
+  const sample = {
+    size: 1,
+    height: 2,
+    foo: 'bar'
+  }
+
+  // this validation will fail
+  const rules = {
+    value: 'only:size,height',
+  }
+  ```
+- duration
+  ```javascript
+  const sample = {
+    months: 2,
+    seconds: 3
+  }
+
+  const rules = {
+    value: 'duration',
+  }
+  ```

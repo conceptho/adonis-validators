@@ -4,7 +4,7 @@
 const test = require('japa');
 const isBetween = require('../src/validators/isBetween');
 
-const { throws } = require('./helpers');
+const { throws } = require('../japaHelpers');
 
 test.group('isBetween', () => {
   test('a number inside the given range should not throw error',

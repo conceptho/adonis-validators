@@ -6,7 +6,7 @@ const isBetween = async (data, field, message, args, get = () => data[field]) =>
 
   const [lowerLimit, upperLimit] = args;
   if (!(value >= Number(lowerLimit) && value <= Number(upperLimit))) {
-    throw `isBetween failed for value ${value}: ${lowerLimit} <= ${value} <= ${upperLimit}.`;
+    throw message || `isBetween failed for value ${value}: ${lowerLimit} <= ${value} <= ${upperLimit}.`;
   }
 };
 

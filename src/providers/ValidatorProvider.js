@@ -17,7 +17,10 @@ class ValidatorProvider extends ServiceProvider {
 
     const cpf = require('../validators/cpf');
     const isBetween = require('../validators/isBetween');
+    const only = require('../validators/only');
+    const duration = require('../validators/duration');
 
+    // Dependency injection
     const uniqueWhere = require('../validators/uniqueWhere')(Database);
     const exists = require('../validators/exists')(Database);
 
@@ -25,6 +28,8 @@ class ValidatorProvider extends ServiceProvider {
     Validator.extend('isBetween', isBetween.bind(isBetween));
     Validator.extend('uniqueWhere', uniqueWhere.bind(uniqueWhere));
     Validator.extend('exists', exists.bind(exists));
+    Validator.extend('only', only.bind(only));
+    Validator.extend('duration', duration.bind(duration));
   }
 }
 
