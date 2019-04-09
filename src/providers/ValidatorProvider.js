@@ -19,6 +19,7 @@ class ValidatorProvider extends ServiceProvider {
     const isBetween = require('../validators/isBetween');
     const only = require('../validators/only');
     const duration = require('../validators/duration');
+    const cnpj = require('../validators/cnpj');
 
     // Dependency injection
     const uniqueWhere = require('../validators/uniqueWhere')(Database);
@@ -30,6 +31,7 @@ class ValidatorProvider extends ServiceProvider {
     Validator.extend('exists', exists.bind(exists));
     Validator.extend('only', only.bind(only));
     Validator.extend('duration', duration.bind(duration));
+    Validator.extend('cnpj', cnpj.bind(cnpj));
   }
 }
 
