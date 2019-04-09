@@ -23,10 +23,19 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Run tests
-          command: npm test
+          command: npm run coverage:test
       - persist_to_workspace:
           root: ~/repo
           paths: .
+
+  publish-coverage:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Publish coverage
+          command: npm run coverage:publish
 
   deploy:
     <<: *defaults
@@ -45,11 +54,14 @@ workflows:
   test-deploy:
     jobs:
       - test
+      - publish-coverage:
+          requires:
+            - test
       - deploy:
           requires:
             - test
           filters:
             tags:
-              only: /^v.*/
+              only: /^[0-9]+\.[0-9]+\.[0-9]+$/
             branches:
-              only: master
+              ignore: /.*/

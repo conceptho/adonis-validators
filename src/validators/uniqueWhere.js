@@ -11,7 +11,9 @@ const uniqueWhere = Database => async (data, field, message, args, get) => {
   const [table, column, whereColumn, whereValueName = whereColumn] = args;
   const id = get(data, 'id');
   const whereValue = get(data, whereValueName);
-  const query = Database.table(table).where(column, value).where(whereColumn, whereValue);
+  const query = Database.table(table)
+    .where(column, value)
+    .where(whereColumn, whereValue);
   const row = await (id ? query.where('id', '<>', id) : query).first();
 
   if (row) {

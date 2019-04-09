@@ -1,4 +1,7 @@
 # Adonis Validators
+![npm (tag)](https://img.shields.io/npm/v/@conceptho/adonis-validators/latest.svg?color=green&logo=npm&style=for-the-badge)
+![CircleCI branch](https://img.shields.io/circleci/project/github/conceptho/adonis-validators/master.svg?logo=circleci&style=for-the-badge)
+![Codecov branch](https://img.shields.io/codecov/c/github/conceptho/adonis-validators/master.svg?logo=codecov&style=for-the-badge)
 
 How to Use:
 
@@ -65,5 +68,18 @@ How to Use:
 
   const rules = {
     value: 'duration',
+  }
+  ```
+- cnpj
+  ```javascript
+  const samples = {
+    cnpj: '15.170.010/0001-43',
+    cnpj2: '15170010000143'
+  }
+
+  // fails
+  const rules = {
+    cnpj: 'cnpj',
+    cnpj2: 'cnpj',
   }
   ```
