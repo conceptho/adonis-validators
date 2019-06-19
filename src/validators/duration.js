@@ -1,7 +1,15 @@
 /* eslint-disable no-restricted-syntax */
 const { reduce } = require('lodash');
 
-const fields = ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'];
+const fields = [
+  'seconds',
+  'minutes',
+  'hours',
+  'days',
+  'weeks',
+  'months',
+  'years',
+];
 
 async function duration(data, field, message, args, get = () => data[field]) {
   const value = get(data, field);
@@ -10,13 +18,17 @@ async function duration(data, field, message, args, get = () => data[field]) {
     throw message || `duration validation failed. ${field} is not an object.`;
   }
 
-  const isValid = reduce(value, (acc, v, k) => fields.includes(k) && Number.isInteger(Number(v)), true);
+  const isValid = reduce(
+    value,
+    (acc, v, k) => fields.includes(k) && Number.isInteger(Number(v)),
+    true,
+  );
 
   if (isValid) {
     return;
   }
 
-  throw message || 'only validation failed. invalid fields.';
+  throw message || 'duration validation failed. invalid fields.';
 }
 
 module.exports = duration;
