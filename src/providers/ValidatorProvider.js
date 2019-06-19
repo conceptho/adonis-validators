@@ -20,6 +20,10 @@ class ValidatorProvider extends ServiceProvider {
     const only = require('../validators/only');
     const duration = require('../validators/duration');
     const cnpj = require('../validators/cnpj');
+    const greaterEqualsThan = require('../validators/greaterEqualsThan');
+    const greaterThan = require('../validators/greaterThan');
+    const lessEqualsThan = require('../validators/lessEqualsThan');
+    const lessThan = require('../validators/lessThan');
 
     // Dependency injection
     const uniqueWhere = require('../validators/uniqueWhere')(Database);
@@ -32,6 +36,10 @@ class ValidatorProvider extends ServiceProvider {
     Validator.extend('only', only.bind(only));
     Validator.extend('duration', duration.bind(duration));
     Validator.extend('cnpj', cnpj.bind(cnpj));
+    Validator.extend('greaterEqualsThan', greaterEqualsThan.bind(greaterEqualsThan));
+    Validator.extend('greaterThan', greaterThan.bind(greaterThan));
+    Validator.extend('lessEqualsThan', lessEqualsThan.bind(lessEqualsThan));
+    Validator.extend('lessThan', lessThan.bind(lessThan));
   }
 }
 
