@@ -15,6 +15,10 @@ test.group('greaterThan', () => {
     assert.isFalse(await throws(async () => greaterThan({ value: 0.1 }, 'value', 'error', ['0'])));
     assert.isTrue(await throws(async () => greaterThan({ value: 0.0 }, 'value', 'error', ['0'])));
     assert.isTrue(await throws(async () => greaterThan({ value: -1.0 }, 'value', 'error', ['0'])));
+
+    assert.isFalse(await throws(async () => greaterThan({ value: 0.1, target: 0 }, 'value', 'error', ['target'])));
+    assert.isTrue(await throws(async () => greaterThan({ value: 0.0, target: 0 }, 'value', 'error', ['target'])));
+    assert.isTrue(await throws(async () => greaterThan({ value: -1.0, target: 0 }, 'value', 'error', ['target'])));
   });
 });
 
@@ -23,6 +27,16 @@ test.group('greaterEqualsThan', () => {
     assert.isFalse(await throws(async () => greaterEqualsThan({ value: 0.0 }, 'value', 'error', ['0'])));
     assert.isFalse(await throws(async () => greaterEqualsThan({ value: 1.0 }, 'value', 'error', ['0'])));
     assert.isTrue(await throws(async () => greaterEqualsThan({ value: -1.0 }, 'value', 'error', ['0'])));
+
+    assert.isFalse(
+      await throws(async () => greaterEqualsThan({ value: 0.0, target: 0 }, 'value', 'error', ['target'])),
+    );
+    assert.isFalse(
+      await throws(async () => greaterEqualsThan({ value: 1.0, target: 0 }, 'value', 'error', ['target'])),
+    );
+    assert.isTrue(
+      await throws(async () => greaterEqualsThan({ value: -1.0, target: 0 }, 'value', 'error', ['target'])),
+    );
   });
 });
 
@@ -31,6 +45,10 @@ test.group('lessEqualsThan', () => {
     assert.isFalse(await throws(async () => lessEqualsThan({ value: 0.0 }, 'value', 'error', ['0'])));
     assert.isTrue(await throws(async () => lessEqualsThan({ value: 1.0 }, 'value', 'error', ['0'])));
     assert.isFalse(await throws(async () => lessEqualsThan({ value: -1.0 }, 'value', 'error', ['0'])));
+
+    assert.isFalse(await throws(async () => lessEqualsThan({ value: 0.0, target: 0 }, 'value', 'error', ['target'])));
+    assert.isTrue(await throws(async () => lessEqualsThan({ value: 1.0, target: 0 }, 'value', 'error', ['target'])));
+    assert.isFalse(await throws(async () => lessEqualsThan({ value: -1.0, target: 0 }, 'value', 'error', ['target'])));
   });
 });
 
@@ -39,5 +57,9 @@ test.group('lessThan', () => {
     assert.isTrue(await throws(async () => lessThan({ value: 0.0 }, 'value', 'error', ['0'])));
     assert.isTrue(await throws(async () => lessThan({ value: 1.0 }, 'value', 'error', ['0'])));
     assert.isFalse(await throws(async () => lessThan({ value: -1.0 }, 'value', 'error', ['0'])));
+
+    assert.isTrue(await throws(async () => lessThan({ value: 0.0, target: 0 }, 'value', 'error', ['target'])));
+    assert.isTrue(await throws(async () => lessThan({ value: 1.0, target: 0 }, 'value', 'error', ['target'])));
+    assert.isFalse(await throws(async () => lessThan({ value: -1.0, target: 0 }, 'value', 'error', ['target'])));
   });
 });
